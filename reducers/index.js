@@ -1,6 +1,8 @@
 import { ADD_CARD, ADD_DECK, RECEIVE_DECKS } from '../actions';
 
-const INITIAL_DECKS = {};
+const INITIAL_DECKS = {
+    decks: []
+};
 
 export function deckReducer(state = INITIAL_DECKS, action) {
     switch (action.type) {
@@ -12,6 +14,7 @@ export function deckReducer(state = INITIAL_DECKS, action) {
         };
     }
     case ADD_DECK: {
+        console.log(action);
         const { title } = action.payload;
         return {
             ...state,
