@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native';
 
-const DECK_STORAGE_KEY = 'hnrchrdl:udacicards:decks';
+const DECK_STORAGE_KEY = 'hnrchrdl:udacicards:decks2';
 
 export function getDeck(id) {
     // Return a Deck by it's title
@@ -27,7 +27,6 @@ export function addCardToDeck(title, card) {
     // Retrieve a deck by it's title, add card to list of questions
     // and merge card back in
     return getDeck(title).then(deck => {
-        console.log(deck);
         const questions = [...deck.questions, card];
         return AsyncStorage.mergeItem(
             DECK_STORAGE_KEY,

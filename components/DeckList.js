@@ -13,7 +13,7 @@ class DeckList extends Component {
     }
     render() {
         const { decks, navigation } = this.props;
-        const keys = Object.keys(decks);
+        const keys = Object.keys(decks || {});
         return (
             <View style={GLOBAL_STYLES.container}>
                 {decks && keys.length ? (
