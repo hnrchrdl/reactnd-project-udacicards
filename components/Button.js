@@ -17,9 +17,19 @@ const styles = StyleSheet.create({
         color: colors.FOREGROUND,
         textAlign: 'center'
     },
+    default: {
+        borderColor: colors.HIGHLIGHT,
+        backgroundColor: colors.BACKGROUND_ALT
+    },
     submit: {
         backgroundColor: colors.HIGHLIGHT_ALT
     },
-    yes: {},
-    no: {}
+    yes: {
+        borderColor: colors.HIGHLIGHT,
+        backgroundColor: colors.HIGHLIGHT
+    },
+    no: {
+        borderColor: colors.HIGHLIGHT,
+        backgroundColor: colors.BACKGROUND_ALT
+    }
 });

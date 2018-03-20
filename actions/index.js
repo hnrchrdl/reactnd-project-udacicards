@@ -22,7 +22,7 @@ export function addDeck(title) {
 
 export function addCard(title, card) {
     return {
-        type: ADD_DECK,
+        type: ADD_CARD,
         payload: {
             title,
             card

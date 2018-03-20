@@ -14,7 +14,6 @@ export function deckReducer(state = INITIAL_DECKS, action) {
         };
     }
     case ADD_DECK: {
-        console.log(action);
         const { title } = action.payload;
         return {
             ...state,
@@ -31,12 +30,14 @@ export function deckReducer(state = INITIAL_DECKS, action) {
         const { title, card } = action.payload;
         return {
             ...state,
-            decks: state.decks.map(deck => {
-                if (deck.title === title) {
-                    deck.questions = [...deck.questions, card];
-                }
-                return deck;
-            })
+            decks: [
+                ...state.decks.map(deck => {
+                    if (deck.title === title) {
+                        deck.questions = [...deck.questions, card];
+                    }
+                    return deck;
+                })
+            ]
         };
     }
     default:

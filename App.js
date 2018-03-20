@@ -1,14 +1,19 @@
 import React from 'react';
+
 import { createStore } from 'redux';
-
 import { Provider } from 'react-redux';
-import { View, StatusBar, StyleSheet } from 'react-native';
-import { TabNavigator } from 'react-navigation';
+import { View, StatusBar } from 'react-native';
+import { TabNavigator, StackNavigator } from 'react-navigation';
+import { Constants } from 'expo';
 
+import DeckDetails from './components/DeckDetails';
 import DeckList from './components/DeckList';
 import DeckNew from './components/DeckNew';
+import Quiz from './components/Quiz';
+import QuestionNew from './components/QuestionNew';
+import GLOBAL_STYLES from './utils/styles';
+
 import { deckReducer } from './reducers';
-import { Constants } from 'expo';
 import * as colors from './utils/colors';
 
 const CustomStatusBar = () => (
@@ -16,7 +21,8 @@ const CustomStatusBar = () => (
         <StatusBar translucent backgroundColor={'#7c53c3'} />
     </View>
 );
-const Tabs = TabNavigator(
+
+const Home = TabNavigator(
     {
         List: {
             screen: DeckList,
@@ -45,21 +51,56 @@ const Tabs = TabNavigator(
     }
 );
 
+const Main = StackNavigator(
+    {
+        Home: {
+            screen: Home,
+            navigationOptions: {
+                header: null
+            }
+        },
+        Deck: {
+            screen: DeckDetails,
+            navigationOptions: {
+                headerTitle: 'Deck'
+            }
+        },
+        Quiz: {
+            screen: Quiz,
+            navigationOptions: {
+                headerTitle: 'Quiz'
+            }
+        },
+        QuestionNew: {
+            screen: QuestionNew,
+            navigationOptions: {
+                headerTitle: 'New Card'
+            }
+        }
+    },
+    {
+        initialRouteName: 'Home',
+        headerMode: 'screen',
+        navigationOptions: {
+            headerStyle: {
+                backgroundColor: colors.BACKGROUND_ALT
+            },
+            headerTitleStyle: {
+                color: colors.FOREGROUND_ALT
+            }
+        }
+    }
+);
+
 export default class App extends React.Component {
     render() {
         return (
             <Provider store={createStore(deckReducer)}>
-                <View style={[styles.app, { flex: 1 }]}>
+                <View style={[GLOBAL_STYLES.app, { flex: 1 }]}>
                     <CustomStatusBar />
-                    <Tabs />
+                    <Main />
                 </View>
             </Provider>
         );
     }
 }
-
-const styles = StyleSheet.create({
-    app: {
-        backgroundColor: colors.BACKGROUND
-    }
-});
