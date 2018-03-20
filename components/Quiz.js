@@ -4,6 +4,7 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import GLOBAL_STYLES from '../utils/styles';
 import Button from './Button';
 import * as colors from '../utils/colors';
+import { resetNotifications } from '../utils/notifications';
 
 class Quiz extends Component {
     constructor(props) {
@@ -39,6 +40,10 @@ class Quiz extends Component {
     renderResults() {
         const { countCorrect } = this.state;
         const { deck } = this.props;
+
+        // Cancel notifications for today, because a quiz was finished.
+        resetNotifications();
+
         return (
             <View style={styles.center}>
                 <Text

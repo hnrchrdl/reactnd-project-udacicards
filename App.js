@@ -15,6 +15,8 @@ import GLOBAL_STYLES from './utils/styles';
 import * as colors from './utils/colors';
 import configureStore from './store';
 
+import { setLocalNotifications } from './utils/notifications';
+
 const CustomStatusBar = () => (
     <View style={{ height: Constants.statusBarHeight }}>
         <StatusBar translucent backgroundColor={'#7c53c3'} />
@@ -94,6 +96,9 @@ const Main = StackNavigator(
 const store = configureStore();
 
 export default class App extends React.Component {
+    componentDidMount() {
+        setLocalNotifications();
+    }
     render() {
         return (
             <Provider store={store}>
