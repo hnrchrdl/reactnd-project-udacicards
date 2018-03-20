@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native';
 
-const DECK_STORAGE_KEY = 'hnrchrdl:udacicards:decks2';
+const DECK_STORAGE_KEY = 'hnrchrdl:udacicards:decks';
 
 export function getDeck(id) {
     // Return a Deck by it's title
