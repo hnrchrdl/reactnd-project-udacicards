@@ -5,7 +5,7 @@ import GLOBAL_STYLES from '../utils/styles';
 import * as colors from '../utils/colors';
 import Button from './Button';
 
-import { addCard as addCardActionCreator } from '../actions/';
+import { addCardAsync } from '../actions/';
 
 class QuestionNew extends Component {
     constructor(props) {
@@ -63,8 +63,7 @@ function mapStateToProps(decks, { navigation }) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        createNewCard: (title, card) =>
-            dispatch(addCardActionCreator(title, card))
+        createNewCard: addCardAsync(dispatch)
     };
 }
 
