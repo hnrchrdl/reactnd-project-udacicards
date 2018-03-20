@@ -11,7 +11,9 @@ export default ({ text, type, onPress }) => (
 );
 const styles = StyleSheet.create({
     btn: {
-        padding: 15
+        paddingVertical: 15,
+        paddingHorizontal: 20,
+        borderRadius: 2
     },
     btnText: {
         color: colors.FOREGROUND,
@@ -25,11 +27,13 @@ const styles = StyleSheet.create({
         backgroundColor: colors.HIGHLIGHT_ALT
     },
     yes: {
-        borderColor: colors.HIGHLIGHT,
-        backgroundColor: colors.HIGHLIGHT
+        borderColor: colors.HIGHLIGHT_ALT,
+        borderWidth: 2,
+        backgroundColor: colors.BACKGROUND
     },
     no: {
-        borderColor: colors.HIGHLIGHT,
-        backgroundColor: colors.BACKGROUND_ALT
+        borderColor: colors.BACKGROUND_ALT,
+        borderWidth: 2,
+        backgroundColor: colors.BACKGROUND
     }
 });

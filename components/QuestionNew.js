@@ -40,7 +40,7 @@ class QuestionNew extends Component {
                     style={GLOBAL_STYLES.input}
                     multiline={true}
                     numberOfLines={5}
-                    autoGrow={false}
+                    maxHeight={150}
                     placeholder="The Answer"
                     selectionColor={colors.HIGHLIGHT}
                     underlineColorAndroid={colors.BACKGROUND_ALT}

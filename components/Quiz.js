@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import GLOBAL_STYLES from '../utils/styles';
 import Button from './Button';
 import * as colors from '../utils/colors';
@@ -97,21 +97,26 @@ class Quiz extends Component {
         const { deck } = this.props;
         const questions = deck.questions;
         return (
-            <View style={GLOBAL_STYLES.container}>
+            <ScrollView
+                style={[GLOBAL_STYLES.container]}
+                contentContainerStyle={styles.scrollContainer}
+            >
                 {questionIndex >= questions.length
                     ? this.renderResults()
                     : this.renderQuestion()}
-            </View>
+            </ScrollView>
         );
     }
 }
+
 const styles = StyleSheet.create({
     question: {
         padding: 20,
         fontSize: 30
     },
     answer: {
-        margin: 30,
+        padding: 20,
+        marginBottom: 30,
         fontSize: 20
     },
     textBtn: {
@@ -138,9 +143,11 @@ const styles = StyleSheet.create({
     resultsHeader: {
         fontSize: 25,
         color: colors.FOREGROUND_ALT
+    },
+    scrollContainer: {
+        paddingBottom: 50
     }
 });
-
 function mapStateToProps(decks, { navigation }) {
     const { deckTitle } = navigation.state.params;
     return {
