@@ -20,7 +20,6 @@ export function addDeck(title) {
             [title]: { title, questions: [] }
         })
     ).then(data => {
-        console.log(data);
         return data;
     });
 }
