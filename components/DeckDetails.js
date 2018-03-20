@@ -13,7 +13,9 @@ class DeckDetails extends Component {
     }
     startQuiz() {
         const { navigation, deck } = this.props;
-        navigation.navigate('Quiz', { deckTitle: deck.title });
+        if (deck.questions.length) {
+            navigation.navigate('Quiz', { deckTitle: deck.title });
+        }
     }
     addQuestion() {
         const { navigation, deck } = this.props;

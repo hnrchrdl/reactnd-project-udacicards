@@ -3,61 +3,104 @@ import { connect } from 'react-redux';
 import { StyleSheet, Text, View } from 'react-native';
 import GLOBAL_STYLES from '../utils/styles';
 import Button from './Button';
-import { HIGHLIGHT } from '../utils/colors';
 import * as colors from '../utils/colors';
 
 class Quiz extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showAnswer: false
+            showAnswer: false,
+            questionIndex: 0,
+            countCorrect: 0
         };
         this.submitAnswer = this.submitAnswer.bind(this);
     }
     submitAnswer(correct) {
-        console.log(correct);
+        const { countCorrect, questionIndex } = this.state;
+        this.setState({
+            questionIndex: questionIndex + 1,
+            countCorrect: correct ? countCorrect + 1 : countCorrect,
+            showAnswer: false
+        });
     }
-    render() {
-        const { question, answer } = this.props;
+    renderResults() {
+        const { countCorrect } = this.state;
+        const { deck } = this.props;
+        return (
+            <View style={styles.center}>
+                <Text
+                    style={[
+                        GLOBAL_STYLES.defaulttext,
+                        styles.results,
+                        styles.resultsHeader
+                    ]}
+                >
+                    Your Score:
+                </Text>
+                <Text style={[GLOBAL_STYLES.defaulttext, styles.results]}>
+                    {(countCorrect / deck.questions.length * 100).toFixed(0)}
+                    %
+                </Text>
+            </View>
+        );
+    }
+    renderQuestion() {
+        const { questionIndex } = this.state;
+        const { deck } = this.props;
+        const questions = deck.questions;
+        const card = questions[questionIndex];
+        const { question, answer } = card;
         const { showAnswer } = this.state;
         return (
-            <View style={GLOBAL_STYLES.container}>
-                <View>
-                    <Text style={[GLOBAL_STYLES.defaulttext, styles.question]}>
-                        {question}
+            <View>
+                <View style={styles.right}>
+                    <Text style={GLOBAL_STYLES.defaulttext}>
+                        {questionIndex + 1} / {questions.length}
                     </Text>
-                    {!showAnswer && (
-                        <Text
-                            style={[
-                                GLOBAL_STYLES.defaulttext,
-                                styles.answer,
-                                styles.textBtn
-                            ]}
-                            onPress={() => this.setState({ showAnswer: true })}
-                        >
-                            Show Answer
-                        </Text>
-                    )}
-                    {showAnswer && (
-                        <Text
-                            style={[GLOBAL_STYLES.defaulttext, styles.answer]}
-                        >
-                            {answer}
-                        </Text>
-                    )}
-                    <View style={styles.btnWrapper}>
-                        <Button
-                            type="yes"
-                            text="yes"
-                            onPress={() => this.submitAnswer(true)}
-                        />
-                        <Button
-                            type="no"
-                            text="no "
-                            onPress={() => this.submitAnswer(false)}
-                        />
-                    </View>
                 </View>
+                <Text style={[GLOBAL_STYLES.defaulttext, styles.question]}>
+                    {question}
+                </Text>
+                {showAnswer ? (
+                    <Text style={[GLOBAL_STYLES.defaulttext, styles.answer]}>
+                        {answer}
+                    </Text>
+                ) : (
+                    <Text
+                        style={[
+                            GLOBAL_STYLES.defaulttext,
+                            styles.answer,
+                            styles.textBtn
+                        ]}
+                        onPress={() => this.setState({ showAnswer: true })}
+                    >
+                        Show Answer
+                    </Text>
+                )}
+                <View style={styles.btnWrapper}>
+                    <Button
+                        type="yes"
+                        text="Correct"
+                        onPress={() => this.submitAnswer(true)}
+                    />
+                    <Button
+                        type="no"
+                        text="Incorrect"
+                        onPress={() => this.submitAnswer(false)}
+                    />
+                </View>
+            </View>
+        );
+    }
+    render() {
+        const { questionIndex } = this.state;
+        const { deck } = this.props;
+        const questions = deck.questions;
+        return (
+            <View style={GLOBAL_STYLES.container}>
+                {questionIndex >= questions.length
+                    ? this.renderResults()
+                    : this.renderQuestion()}
             </View>
         );
     }
@@ -78,15 +121,34 @@ const styles = StyleSheet.create({
     btnWrapper: {
         flexDirection: 'row',
         justifyContent: 'space-around'
+    },
+    center: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1
+    },
+    right: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end'
+    },
+    results: {
+        fontSize: 30,
+        textAlign: 'center'
+    },
+    resultsHeader: {
+        fontSize: 25,
+        color: colors.FOREGROUND_ALT
     }
 });
-function mapStateToProps(state, { navigation }) {
+
+function mapStateToProps(decks, { navigation }) {
     const { deckTitle } = navigation.state.params;
     return {
         deckTitle,
-        navigation,
-        question: 'Question',
-        answer: 'Answer'
+        deck: decks
+            ? { ...decks.decks.find(deck => deck.title === deckTitle) }
+            : null,
+        navigation
     };
 }
 function mapDispatchToProps() {

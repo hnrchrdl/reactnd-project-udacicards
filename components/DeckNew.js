@@ -22,6 +22,7 @@ class DeckNew extends Component {
         const { allDecks, createNewDeck, navigation } = this.props;
         if (text && !allDecks.find(d => d.title === text)) {
             createNewDeck(text);
+            this.setState({ text: '' });
             navigation.goBack();
         }
     }
