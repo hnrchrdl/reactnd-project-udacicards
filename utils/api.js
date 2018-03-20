@@ -12,14 +12,17 @@ export function getDecks() {
     return AsyncStorage.getItem(DECK_STORAGE_KEY).then(JSON.parse);
 }
 
-export function saveDeckTitle(title) {
+export function addDeck(title) {
     // Merge a new deck with empty list of questions to storage
     return AsyncStorage.mergeItem(
         DECK_STORAGE_KEY,
         JSON.stringify({
             [title]: { title, questions: [] }
         })
-    );
+    ).then(data => {
+        console.log(data);
+        return data;
+    });
 }
 export function addCardToDeck(title, card) {
     // Retrieve a deck by it's title, add card to list of questions

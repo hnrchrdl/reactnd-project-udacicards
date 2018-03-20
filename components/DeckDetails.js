@@ -46,9 +46,7 @@ class DeckDetails extends Component {
 function mapStateToProps(decks, { navigation }) {
     const { deckTitle } = navigation.state.params;
     return {
-        deck: decks
-            ? { ...decks.decks.find(deck => deck.title === deckTitle) }
-            : null,
+        deck: decks[deckTitle],
         navigation
     };
 }

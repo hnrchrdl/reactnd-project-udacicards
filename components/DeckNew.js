@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, TextInput } from 'react-native';
 
-import { addDeck as addDeckActionCreator } from '../actions';
+import { addDeckAsync } from '../actions';
 import Button from './Button';
 
 import GLOBAL_STYLES from '../utils/styles';
@@ -19,11 +19,11 @@ class DeckNew extends Component {
 
     submitCard() {
         const { text } = this.state;
-        const { allDecks, createNewDeck, navigation } = this.props;
-        if (text && !allDecks.find(d => d.title === text)) {
+        const { createNewDeck, navigation } = this.props;
+        if (text) {
             createNewDeck(text);
             this.setState({ text: '' });
-            navigation.goBack();
+            //navigation.goBack();
         }
     }
 
@@ -47,14 +47,13 @@ class DeckNew extends Component {
 
 function mapStateToProps(decks, { navigation }) {
     return {
-        allDecks: decks ? decks.decks : [],
         navigation
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        createNewDeck: title => dispatch(addDeckActionCreator(title))
+        createNewDeck: addDeckAsync(dispatch)
     };
 }
 

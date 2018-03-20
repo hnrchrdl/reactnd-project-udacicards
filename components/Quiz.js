@@ -145,13 +145,8 @@ function mapStateToProps(decks, { navigation }) {
     const { deckTitle } = navigation.state.params;
     return {
         deckTitle,
-        deck: decks
-            ? { ...decks.decks.find(deck => deck.title === deckTitle) }
-            : null,
+        deck: decks[deckTitle],
         navigation
     };
 }
-function mapDispatchToProps() {
-    return {};
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Quiz);
+export default connect(mapStateToProps)(Quiz);

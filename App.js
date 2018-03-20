@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { View, StatusBar } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
@@ -13,8 +12,8 @@ import Quiz from './components/Quiz';
 import QuestionNew from './components/QuestionNew';
 import GLOBAL_STYLES from './utils/styles';
 
-import { deckReducer } from './reducers';
 import * as colors from './utils/colors';
+import configureStore from './store';
 
 const CustomStatusBar = () => (
     <View style={{ height: Constants.statusBarHeight }}>
@@ -92,10 +91,12 @@ const Main = StackNavigator(
     }
 );
 
+const store = configureStore();
+
 export default class App extends React.Component {
     render() {
         return (
-            <Provider store={createStore(deckReducer)}>
+            <Provider store={store}>
                 <View style={[GLOBAL_STYLES.app, { flex: 1 }]}>
                     <CustomStatusBar />
                     <Main />
