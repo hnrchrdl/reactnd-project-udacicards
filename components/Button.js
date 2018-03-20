@@ -13,18 +13,22 @@ const styles = StyleSheet.create({
     btn: {
         paddingVertical: 15,
         paddingHorizontal: 20,
-        borderRadius: 2
+        borderRadius: 2,
+        margin: 5
     },
     btnText: {
         color: colors.FOREGROUND,
         textAlign: 'center'
     },
     default: {
-        borderColor: colors.HIGHLIGHT,
-        backgroundColor: colors.BACKGROUND_ALT
+        borderColor: colors.BACKGROUND_ALT,
+        borderWidth: 2,
+        backgroundColor: colors.BACKGROUND
     },
     submit: {
-        backgroundColor: colors.HIGHLIGHT_ALT
+        borderColor: colors.HIGHLIGHT_ALT,
+        borderWidth: 2,
+        backgroundColor: colors.BACKGROUND
     },
     yes: {
         borderColor: colors.HIGHLIGHT_ALT,

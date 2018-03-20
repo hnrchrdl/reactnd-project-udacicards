@@ -23,7 +23,7 @@ class DeckNew extends Component {
         if (text) {
             createNewDeck(text);
             this.setState({ text: '' });
-            navigation.goBack();
+            navigation.navigate('Deck', { deckTitle: text });
         }
     }
 
@@ -39,7 +39,11 @@ class DeckNew extends Component {
                     onChangeText={text => this.setState({ text })}
                     value={this.state.text}
                 />
-                <Button text="SUBMIT" type="submit" onPress={this.submitCard} />
+                <Button
+                    text="Create Deck"
+                    type="submit"
+                    onPress={this.submitCard}
+                />
             </View>
         );
     }

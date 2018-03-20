@@ -47,7 +47,11 @@ class QuestionNew extends Component {
                     onChangeText={answer => this.setState({ answer })}
                     value={this.state.answer}
                 />
-                <Button text="SUBMIT" type="submit" onPress={this.submitCard} />
+                <Button
+                    text="Create Card"
+                    type="submit"
+                    onPress={this.submitCard}
+                />
             </View>
         );
     }

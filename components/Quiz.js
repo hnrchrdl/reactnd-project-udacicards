@@ -14,6 +14,8 @@ class Quiz extends Component {
             countCorrect: 0
         };
         this.submitAnswer = this.submitAnswer.bind(this);
+        this.goBack = this.goBack.bind(this);
+        this.reset = this.reset.bind(this);
     }
     submitAnswer(correct) {
         const { countCorrect, questionIndex } = this.state;
@@ -22,6 +24,17 @@ class Quiz extends Component {
             countCorrect: correct ? countCorrect + 1 : countCorrect,
             showAnswer: false
         });
+    }
+    reset() {
+        this.setState({
+            showAnswer: false,
+            questionIndex: 0,
+            countCorrect: 0
+        });
+    }
+    goBack() {
+        const { navigation } = this.props;
+        navigation.goBack();
     }
     renderResults() {
         const { countCorrect } = this.state;
@@ -41,6 +54,18 @@ class Quiz extends Component {
                     {(countCorrect / deck.questions.length * 100).toFixed(0)}
                     %
                 </Text>
+                <View style={styles.btnWrapper}>
+                    <Button
+                        type="default"
+                        text="Restart Quiz"
+                        onPress={this.reset}
+                    />
+                    <Button
+                        type="default"
+                        text="Back to Deck"
+                        onPress={this.goBack}
+                    />
+                </View>
             </View>
         );
     }
@@ -77,7 +102,7 @@ class Quiz extends Component {
                         Show Answer
                     </Text>
                 )}
-                <View style={styles.btnWrapper}>
+                <View>
                     <Button
                         type="yes"
                         text="Correct"
@@ -124,9 +149,11 @@ const styles = StyleSheet.create({
         color: colors.HIGHLIGHT
     },
     btnWrapper: {
+        marginTop: 30,
         flexDirection: 'row',
-        justifyContent: 'space-around'
+        justifyContent: 'center'
     },
+
     center: {
         justifyContent: 'center',
         alignItems: 'center',
