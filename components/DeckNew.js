@@ -23,7 +23,7 @@ class DeckNew extends Component {
         if (text) {
             createNewDeck(text);
             this.setState({ text: '' });
-            //navigation.goBack();
+            navigation.goBack();
         }
     }
 

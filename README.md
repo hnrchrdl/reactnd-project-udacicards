@@ -2,6 +2,10 @@
 
 This is the final assessment project for Udacity's React Native course.
 
+## Platforms
+
+Only tested with Android.
+
 ## Installation
 
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
