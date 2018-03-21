@@ -11,7 +11,7 @@ export default ({ deck }) => (
                     {deck.title}
                 </Text>
                 <Text style={[GLOBAL_STYLES.defaulttext, styles.subheader]}>
-                    {deck.questions.length} cards.
+                    {deck.questions ? deck.questions.length : 0} cards.
                 </Text>
             </View>
         )}
