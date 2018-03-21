@@ -60,8 +60,7 @@ class QuestionNew extends Component {
 function mapStateToProps(decks, { navigation }) {
     const { deckTitle } = navigation.state.params;
     return {
-        deckTitle,
-        navigation
+        deckTitle
     };
 }
 

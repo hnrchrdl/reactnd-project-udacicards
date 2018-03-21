@@ -49,10 +49,8 @@ class DeckNew extends Component {
     }
 }
 
-function mapStateToProps(decks, { navigation }) {
-    return {
-        navigation
-    };
+function mapStateToProps() {
+    return {};
 }
 
 function mapDispatchToProps(dispatch) {

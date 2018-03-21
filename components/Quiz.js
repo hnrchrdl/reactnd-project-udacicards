@@ -184,8 +184,7 @@ function mapStateToProps(decks, { navigation }) {
     const { deckTitle } = navigation.state.params;
     return {
         deckTitle,
-        deck: decks[deckTitle],
-        navigation
+        deck: decks[deckTitle]
     };
 }
 export default connect(mapStateToProps)(Quiz);

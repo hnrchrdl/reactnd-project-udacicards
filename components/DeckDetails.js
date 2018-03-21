@@ -46,8 +46,7 @@ class DeckDetails extends Component {
 function mapStateToProps(decks, { navigation }) {
     const { deckTitle } = navigation.state.params;
     return {
-        deck: decks[deckTitle],
-        navigation
+        deck: decks[deckTitle]
     };
 }
 
