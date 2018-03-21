@@ -9,7 +9,9 @@ export function getDeck(id) {
 
 export function getDecks() {
     // Returns all available decks.
-    return AsyncStorage.getItem(DECK_STORAGE_KEY).then(JSON.parse);
+    return AsyncStorage.getItem(DECK_STORAGE_KEY).then(
+        data => (data ? JSON.parse(data) : {})
+    );
 }
 
 export function addDeck(title) {
